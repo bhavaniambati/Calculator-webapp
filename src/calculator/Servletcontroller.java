@@ -1,5 +1,5 @@
-package calculator;
 
+package calculator;
 import java.io.IOException;
 
 
@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/ServletController")
@@ -19,37 +18,54 @@ import javax.servlet.http.HttpSession;
 	public class Servletcontroller extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	 
 	 double c;
-
-
-	@Override
+		 
+@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException 
 	{
-		// Create an object of BasicCalc class
-		
-		//get parameter with req.getparameter() method and 
-		
-		// set the values with set parameter into variable a, b
-		
-		// get parameter operation 
-		
-	//	switch (operation)		
-		{
-		//write switch cases for calling different method of operations
+	BasicCalc Det=new BasicCalc();
+	double a=Double.valueOf(req.getParameter("a"));
+	double b=Double.valueOf(req.getParameter("b"));
+	Det.setA(a);   
+	 Det.setB(b); 
+	String operation=req.getParameter("operation");
+	
+switch( operation)		
+{
+	case "Add":
+		c=Det.add();
+		System.out.println("c");
+break;
+	case "Subtract":
+		c=Det.subtract();
+		System.out.println("c");
+break;
+	case "Multiply":
+		c=Det.multiply();
+		System.out.println("c");
+break;
+	case "Divide":
+		c=Det.divide();
+		System.out.println("c");
+break;
+default:System.out.println("wrong choice");
 		}
+	req.setAttribute("answer",c);
+				//write switch cases for calling different method of operations
+		
 		RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-		rd.forward(req, resp); 
-		} 
+		rd.forward (req, resp); 
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException {
 	doGet(req, resp);
+
+	
+	
+	
 	}
 }
-	
-
-
-
-	
